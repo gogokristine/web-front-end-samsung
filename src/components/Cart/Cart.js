@@ -1,12 +1,16 @@
 import styled from 'styled-components/macro';
 import CartTitle from './CartTitle';
 import CartList from './CartList';
+import { useContext } from 'react';
+import { CartContext } from 'app/App';
 
-export function Cart({ title, products, total, onUpdate }) {
+
+export function Cart() {
+  const useCart = useContext(CartContext)
   return (
     <Container>
-      <CartTitle>{title}</CartTitle>
-      <CartList products={products} total={total} onUpdate={onUpdate} />
+      <CartTitle>{useCart.title}</CartTitle>
+      <CartList/>
     </Container>
   );
 }

@@ -2,14 +2,17 @@ import styled from 'styled-components/macro';
 import CartItem from './CartItem';
 import CartFooter from './CartFooter';
 import { func } from 'prop-types';
+import { CartContext } from 'app/App';
+import { useContext } from 'react';
 
-export default function CartList({ products, total, onUpdate }) {
+export default function CartList() {
+  const useCart = useContext(CartContext)
   return (
     <Container>
-      {products.map((product) => (
-        <CartItem key={product.id} product={product} onUpdate={onUpdate} />
+      {useCart.products.map((product) => (
+        <CartItem key={product.id} product={product}/>
       ))}
-      <CartFooter total={total} />
+      <CartFooter/>
     </Container>
   );
 }

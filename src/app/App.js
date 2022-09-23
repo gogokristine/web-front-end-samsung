@@ -1,8 +1,16 @@
 import axios from 'axios';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, createContext } from 'react';
 import styled, { css } from 'styled-components/macro';
 import GlobalStyle from 'styles/GlobalStyle';
 import { Cart } from 'components';
+
+export const CartContext = createContext({
+  title: '장바구니',
+  products: null,
+  totalPrice: 0,
+  handleUpdateAmount : () =>{}
+});
+
 
 export default function App() {
   let [loading, setLoading] = useState(true);
@@ -70,12 +78,9 @@ export default function App() {
     <>
       <GlobalStyle />
       <Container>
-        <Cart
-          title={carts.title}
-          products={carts.products}
-          total={carts.totalPrice}
-          onUpdate={handleUpdateAmount}
-        />
+        <CartContext.Provider value={{...carts, handleUpdateAmount}}>
+        <Cart/>
+        </CartContext.Provider>
       </Container>
     </>
   );
